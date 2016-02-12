@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Plugin</title>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery-timerpicker.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(
+	function()
+	{
+		//-----------------------------------------
+		$(".box").timerpicker({activate: activate, setTime:true});
+
+		function activate (event){
+			console.log("plugin inicializado ");
+		}
+
+		/*
+		var data = new Object;
+		data.value = "valor a ser passado para o plugin";
+		data.value2 = "segundo valor a ser passado";
+		$("#box").boilerplate("callMethod",data);
+		
+		$("#button").click(function(){
+			$("#box").boilerplate("destroy",data);
+		});
+				
+		function activate (event){
+			console.log("val 1 : "+event.val);
+			console.log("val 2 : "+event.val2);
+		}
+		
+		function destroy (event){
+			console.log("destroy: "+event.val);
+		}
+		
+		//-------------
+		$("#wrapper").boilerplate({ property01:"box-2"});
+		$("#button2").click(function(){
+			$("#wrapper").boilerplate("destroy",data);
+		});*/
+		//-----------------------------------------
+	});
+
+</script>
+<style type="text/css">
+	.box{ width:200px; height:20px; border:1px solid #666666;}
+</style>
+</head>
+
+<body>
+	<div class="box"></div>
+</body>
+</html>
