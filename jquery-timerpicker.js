@@ -1,6 +1,6 @@
 (function($){
 	//
-	$.fn.timerpicker = function( method )
+	$.fn.jquery_timepicker = function( method )
 	{
 		var methods =
 		{
