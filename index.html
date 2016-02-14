@@ -10,13 +10,16 @@
 	function()
 	{
 		//-----------------------------------------
-		$(".box-timer").jquery_timepicker({activate: activate, setTime:true});
+		$(".box-timer").jquery_timepicker({
+            activate: activate,
+            change:function(){ },
+            setTime:true});
 
 		function activate (event){
 			//plugin activated
 		}
 
-		$("#box").jquery_timepicker({});
+		$("#box").jquery_timepicker({change:function(){}});
 
 		//-----------------------------------------
 	});

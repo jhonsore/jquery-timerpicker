@@ -11,8 +11,10 @@
 		//----------------------------------------------------------------------
 		var defaults =
 		{
+            value                      : '',// initial timer
 			setTime					: false,//put current time in timer picker text
-			activate				: function() {}//timer ativated
+			activate				: function() {},//timer ativated
+            change				: function() {}//timer ativated
 		};
 		
 		var boilerplate_settings;
@@ -55,7 +57,6 @@
 		function _checkClose (__evt__)
 		{
 			var _check = $(__evt__.target).closest('.ui-timerPicker');
-			console.log('close');
 			if(!_check.length && !boilerplate_element.is($(__evt__.target)))
 			{
 				_close();
@@ -109,16 +110,28 @@
 			_addEvents ();
 			$('.ui-timerPicker-choice',boilerplate_element).click(function(){_open(this);});
 
-			if(boilerplate_settings.setTime)
-			{
-				var _dt = new Date();
-				var _hour = (_dt.getHours() <= 9) ? "0"+_dt.getHours()  : _dt.getHours() ;
-				var _minutes = (_dt.getMinutes() <= 9) ? '0'+_dt.getMinutes() : _dt.getMinutes();
-				var _time = _hour+ ":" + _minutes;
-				$('.ui-timerPicker-choice-text',boilerplate_element).html(_time);
-				$('.ui-timerPicker-hour .ui-timerPicker-input',boilerplate_element).val(_hour);
-				$('.ui-timerPicker-minute .ui-timerPicker-input',boilerplate_element).val(_minutes);
-			}
+            if(boilerplate_settings.value)
+            {
+                $('.ui-timerPicker-choice-text',boilerplate_element).html(boilerplate_settings.value);
+                var _arryTimer = boilerplate_settings.value.split(':');
+                var _minutes = _arryTimer[1];
+                var _hour = _arryTimer[0];
+                $('.ui-timerPicker-hour .ui-timerPicker-input',boilerplate_element).val(_hour);
+                $('.ui-timerPicker-minute .ui-timerPicker-input',boilerplate_element).val(_minutes);
+            }
+            else
+            {
+                if(boilerplate_settings.setTime)
+                {
+                    var _dt = new Date();
+                    var _hour = (_dt.getHours() <= 9) ? "0"+_dt.getHours()  : _dt.getHours() ;
+                    var _minutes = (_dt.getMinutes() <= 9) ? '0'+_dt.getMinutes() : _dt.getMinutes();
+                    var _time = _hour+ ":" + _minutes;
+                    $('.ui-timerPicker-choice-text',boilerplate_element).html(_time);
+                    $('.ui-timerPicker-hour .ui-timerPicker-input',boilerplate_element).val(_hour);
+                    $('.ui-timerPicker-minute .ui-timerPicker-input',boilerplate_element).val(_minutes);
+                }
+            }
 		}
 
 		function _open (__el__)
@@ -126,6 +139,7 @@
 			_close ();
 			$('.ui-timerPicker-wrapper',$(__el__).closest('.ui-timerPicker')).show();
 			$(__el__).parent().addClass('ui-timerPicker-on');
+            return false;
 		}
 
 		function _addEvents ()
@@ -153,6 +167,7 @@
 			_newvalue = (_newvalue > _max) ? String('00') : _newvalue;
 			
 			_changeValue (__el__,_newvalue);
+            return false;
 		}
 
 		function _decreaseTime (__el__)
@@ -166,6 +181,7 @@
 			_newvalue = (_newvalue < 10) ? String('0'+_newvalue) : _newvalue;
 
 			_changeValue (__el__,_newvalue);
+            return false;
 		}
 
 		function _changeValue (__el__,__newvalue)
@@ -179,6 +195,7 @@
 			var _minute = $('.ui-timerPicker-minute .ui-timerPicker-input',boilerplate_element).val();
 			var _formated_time = _hour+" : "+_minute;
 			$('.ui-timerPicker-choice-text',boilerplate_element).html(_formated_time);
+            boilerplate_settings.change.call(boilerplate_element, {value:_formated_time, el:boilerplate_settings});
 
 		}
 
@@ -203,8 +220,8 @@
 							_html_ += '<input type="text" tabindex="1" class="ui-timerPicker-input">';
 						_html_ += '</div>';
 						_html_ += '<div class="ui-timerPicker-number-picker">';
-							_html_ += '<button class="ui-timerPicker-plus ui-timerPicker-button"><em></em></button>';
-							_html_ += '<button class="ui-timerPicker-minus ui-timerPicker-button"><em></em></button>';
+							_html_ += '<button type="button" class="ui-timerPicker-plus ui-timerPicker-button"><em></em></button>';
+							_html_ += '<button type="button" class="ui-timerPicker-minus ui-timerPicker-button"><em></em></button>';
 						_html_ += '</div>';
 					_html_ += '</div>';
 					_html_ += '<div class="ui-timerPicker-separator">:</div>';
@@ -213,8 +230,8 @@
 							_html_ += '<input type="text" tabindex="2" class="ui-timerPicker-input">';
 						_html_ += '</div>';
 						_html_ += '<div class="ui-timerPicker-number-picker">';
-							_html_ += '<button class="ui-timerPicker-plus ui-timerPicker-button"><em></em></button>';
-							_html_ += '<button class="ui-timerPicker-minus ui-timerPicker-button"><em></em></button>';
+							_html_ += '<button type="button" class="ui-timerPicker-plus ui-timerPicker-button"><em></em></button>';
+							_html_ += '<button type="button" class="ui-timerPicker-minus ui-timerPicker-button"><em></em></button>';
 						_html_ += '</div>';
 					_html_ += '</div>';
 				_html_ += '</div>';
