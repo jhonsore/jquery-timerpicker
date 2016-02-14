@@ -10,36 +10,14 @@
 	function()
 	{
 		//-----------------------------------------
-		$(".box").timerpicker({activate: activate, setTime:true});
+		$(".box-timer").timerpicker({activate: activate, setTime:true});
 
 		function activate (event){
-			console.log("plugin inicializado ");
+			//plugin activated
 		}
 
-		/*
-		var data = new Object;
-		data.value = "valor a ser passado para o plugin";
-		data.value2 = "segundo valor a ser passado";
-		$("#box").boilerplate("callMethod",data);
-		
-		$("#button").click(function(){
-			$("#box").boilerplate("destroy",data);
-		});
-				
-		function activate (event){
-			console.log("val 1 : "+event.val);
-			console.log("val 2 : "+event.val2);
-		}
-		
-		function destroy (event){
-			console.log("destroy: "+event.val);
-		}
-		
-		//-------------
-		$("#wrapper").boilerplate({ property01:"box-2"});
-		$("#button2").click(function(){
-			$("#wrapper").boilerplate("destroy",data);
-		});*/
+		$("#box").timerpicker({});
+
 		//-----------------------------------------
 	});
 
@@ -50,6 +28,10 @@
 </head>
 
 <body>
-	<div class="box"></div>
+	<p>Timer with current time</p>
+	<div class="box box-timer"></div>
+	<br><br>
+	<p>Timer with no current time</p>
+	<div id="box" class="box"></div>
 </body>
 </html>
